@@ -1,0 +1,1 @@
+# mulimodel_mineralore_detection

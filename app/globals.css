@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-display: "Segoe UI", "Inter", system-ui, -apple-system, sans-serif;
+  --font-sans: "Segoe UI", "Inter", system-ui, -apple-system, sans-serif;
+  --font-mono: "SFMono-Regular", "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  background: #040806;
+  color: #e5f5eb;
+}
+
+::selection {
+  background: rgba(0, 230, 118, 0.3);
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, #33ff9c 0%, #00e676 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.card {
+  background: #070c09;
+  border: 1px solid #1a2e21;
+  border-radius: 10px;
+}
+
+.scrollbar-thin::-webkit-scrollbar {
+  width: 6px;
+}
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: #1e3325;
+  border-radius: 999px;
+}
+
+@keyframes pulse-ring {
+  0% { box-shadow: 0 0 0 0 rgba(0, 230, 118, 0.35); }
+  100% { box-shadow: 0 0 0 8px rgba(0, 230, 118, 0); }
+}
+.pulse-ring {
+  animation: pulse-ring 2.2s ease-out infinite;
+}

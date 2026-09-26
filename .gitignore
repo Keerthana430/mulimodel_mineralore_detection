@@ -1,0 +1,24 @@
+node_modules
+.next
+out
+.env.local
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Python generated files
+__pycache__/
+*.pyc
+
+# Local databases
+*.db
+*.sqlite
+*.sqlite3
+
+# TypeScript build info
+*.tsbuildinfo
+
+# Next.js
+.next/

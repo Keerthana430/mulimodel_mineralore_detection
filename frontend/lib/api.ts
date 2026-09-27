@@ -23,15 +23,9 @@ export interface CompositeResult {
   results: ModalityResult[];
 }
 
-/**
- * Returns the base URL for the FastAPI backend.
- * Defaults to http://localhost:8000 when NEXT_PUBLIC_BACKEND_URL is not set.
- */
-function getBackendUrl(): string {
-  return (
-    process.env.NEXT_PUBLIC_BACKEND_URL?.replace(/\/+$/, "") ??
-    "http://localhost:8000"
-  );
+/** Returns the configured base URL for the FastAPI backend. */
+export function getBackendUrl(): string {
+  return process.env.NEXT_PUBLIC_BACKEND_URL?.trim().replace(/\/+$/, "") ?? "";
 }
 
 /**
@@ -42,14 +36,18 @@ export class NoEndpointError extends Error {
   constructor(public readonly modalityKey: ModalityKey | "classification") {
     super(
       `Backend is unreachable or returned an error for modality "${modalityKey}". ` +
-        `Ensure the FastAPI backend is running at ${getBackendUrl()}.`
+        `Ensure NEXT_PUBLIC_BACKEND_URL points to the running FastAPI backend.`
     );
     this.name = "NoEndpointError";
   }
 }
 
 export async function runModality(key: ModalityKey): Promise<ModalityResult> {
-  const url = `${getBackendUrl()}/api/classify/${key}`;
+  const backendUrl = getBackendUrl();
+  if (!backendUrl) {
+    throw new NoEndpointError(key);
+  }
+  const url = `${backendUrl}/api/classify/${key}`;
 
   let res: Response;
   try {
@@ -72,7 +70,11 @@ export async function runModality(key: ModalityKey): Promise<ModalityResult> {
 }
 
 export async function runComposite(): Promise<CompositeResult> {
-  const url = `${getBackendUrl()}/api/classify/full`;
+  const backendUrl = getBackendUrl();
+  if (!backendUrl) {
+    throw new NoEndpointError("classification");
+  }
+  const url = `${backendUrl}/api/classify/full`;
 
   let res: Response;
   try {

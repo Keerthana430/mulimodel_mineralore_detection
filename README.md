@@ -35,11 +35,13 @@ The dashboard runs at `http://localhost:3000` and calls the backend at `http://l
 
 ### Vercel
 
-Create a Vercel project from this repository and set **Root Directory** to `frontend`. Add:
+Create a Vercel project from this repository and set **Root Directory** to `frontend`. Add this environment variable at build time:
 
 ```text
 NEXT_PUBLIC_BACKEND_URL=https://<your-render-service>.onrender.com
 ```
+
+Do not use a trailing slash in either the frontend backend URL or `ALLOWED_ORIGINS`.
 
 Vercel detects the existing Next.js build and start settings automatically.
 
@@ -54,6 +56,6 @@ Start Command: uvicorn main:app --host 0.0.0.0 --port $PORT
 Health Check Path: /api/health
 ```
 
-Set `ALLOWED_ORIGINS` to the exact Vercel URL and configure the Hugging Face endpoint variables listed in `backend/.env.example`. Set `DATABASE_URL` to a managed PostgreSQL connection string for production; Render's local filesystem is ephemeral, so the default SQLite database is for development only.
+Set `ALLOWED_ORIGINS` to the exact Vercel origin, for example `https://ore-classification-one.vercel.app`, and configure the Hugging Face endpoint variables listed in `backend/.env.example`. Set `DATABASE_URL` to a managed PostgreSQL connection string for production; Render's local filesystem is ephemeral, so the default SQLite database is for development only.
   cards and results page.
 

@@ -1,15 +1,18 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { getBackendUrl } from "@/lib/api";
 
 export function SystemStatus() {
   const [backendConnected, setBackendConnected] = useState(false);
   const [piConnected, setPiConnected] = useState(false);
-  const backendUrl =
-    process.env.NEXT_PUBLIC_BACKEND_URL?.replace(/\/+$/, "") ??
-    "http://localhost:8000";
+  const backendUrl = getBackendUrl();
 
   useEffect(() => {
+    if (!backendUrl) {
+      return;
+    }
+
     const checkStatus = async () => {
       try {
         const res = await fetch(`${backendUrl}/api/connection-status`, {

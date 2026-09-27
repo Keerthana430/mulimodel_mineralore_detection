@@ -5,11 +5,14 @@ import { useEffect, useState } from "react";
 export function SystemStatus() {
   const [backendConnected, setBackendConnected] = useState(false);
   const [piConnected, setPiConnected] = useState(false);
+  const backendUrl =
+    process.env.NEXT_PUBLIC_BACKEND_URL?.replace(/\/+$/, "") ??
+    "http://localhost:8000";
 
   useEffect(() => {
     const checkStatus = async () => {
       try {
-        const res = await fetch("http://localhost:8000/api/connection-status", {
+        const res = await fetch(`${backendUrl}/api/connection-status`, {
           signal: AbortSignal.timeout(2000), // timeout quickly if dead
         });
         if (res.ok) {
@@ -31,7 +34,7 @@ export function SystemStatus() {
     // Then every 3 seconds
     const interval = setInterval(checkStatus, 3000);
     return () => clearInterval(interval);
-  }, []);
+  }, [backendUrl]);
 
   return (
     <section className="mb-6 flex gap-4 shrink-0">

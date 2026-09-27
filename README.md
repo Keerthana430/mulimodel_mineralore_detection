@@ -6,7 +6,6 @@ Multimodal mineral ore classification with a Next.js dashboard and FastAPI infer
 
 - `frontend/` - Next.js 14 App Router application deployed to Vercel.
 - `backend/` - FastAPI service, database layer, and Hugging Face orchestration deployed to Render.
-- `backend/render.yaml` - Render Blueprint for the backend service.
 
 ## Local development
 
@@ -46,7 +45,7 @@ Vercel detects the existing Next.js build and start settings automatically.
 
 ### Render
 
-Use `backend/render.yaml` as the Render Blueprint, or create a Python web service with:
+Create a Python web service with:
 
 ```text
 Root Directory: backend

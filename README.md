@@ -1,40 +1,60 @@
-# OreVision — Multimodal Ore Characterization
+# OreVision
 
-Next.js 14 (App Router, TypeScript, Tailwind) frontend.
+Multimodal mineral ore classification with a Next.js dashboard and FastAPI inference service.
 
-## Run
+## Repository layout
+
+- `frontend/` - Next.js 14 App Router application deployed to Vercel.
+- `backend/` - FastAPI service, database layer, and Hugging Face orchestration deployed to Render.
+- `render.yaml` - Render Blueprint for the backend service.
+
+## Local development
+
+Run each service from its own directory:
+
+### Backend
 ```
+cd backend
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+cp .env.example .env
+uvicorn main:app --reload --port 8000
+```
+
+### Frontend
+```bash
+cd frontend
 npm install
+cp .env.example .env.local
 npm run dev
 ```
 
-## Structure
-- `app/page.tsx` — overview dashboard: icon nav rail, upload button,
-  "Run full classification" launcher, model readiness gauge, and a
-  button-style card grid for RGB / Microscopic / Infrared / Acoustic /
-  Capacitive (no description paragraphs — icon, name, backbone tag only).
-- `app/results/[modality]/page.tsx` — shared results screen for both a
-  single modality and the fused "classification" run. Left column holds
-  the analyzed graphs (class probabilities, confidence trend, and, for
-  the full run, a modality comparison list). Right/center holds the
-  analyzed values (predicted mineral, confidence, accuracy/precision/
-  recall/F1, and a per-modality breakdown table for the full run).
-- `lib/api.ts` — one place to wire real inference. Drop your Hugging
-  Face Space / Inference Endpoint URLs into `.env.local` (see
-  `.env.example`) and `runModality()` will call them instead of the
-  seeded mock data. Edit `normalizeBackendPayload()` once your response
-  JSON shape is finalized.
-- `lib/modalities.ts` — single source of truth for the 5 modalities
-  (icon, label, backbone, accent color) used by the sidebar, homepage
+The dashboard runs at `http://localhost:3000` and calls the backend at `http://localhost:8000`.
+
+## Deployment
+
+### Vercel
+
+Create a Vercel project from this repository and set **Root Directory** to `frontend`. Add:
+
+```text
+NEXT_PUBLIC_BACKEND_URL=https://<your-render-service>.onrender.com
+```
+
+Vercel detects the existing Next.js build and start settings automatically.
+
+### Render
+
+Use the included `render.yaml` Blueprint, or create a Python web service with:
+
+```text
+Root Directory: backend
+Build Command: pip install -r requirements.txt
+Start Command: uvicorn main:app --host 0.0.0.0 --port $PORT
+Health Check Path: /api/health
+```
+
+Set `ALLOWED_ORIGINS` to the exact Vercel URL and configure the Hugging Face endpoint variables listed in `backend/.env.example`. Set `DATABASE_URL` to a managed PostgreSQL connection string for production; Render's local filesystem is ephemeral, so the default SQLite database is for development only.
   cards and results page.
 
-## Design tokens
-Dark navy base (`#07080f` / `#0b0e1a`) with a violet → magenta → cyan
-brand gradient (`tailwind.config.ts` → `colors`, `boxShadow.glow*`,
-`backgroundImage.brand-gradient*`) — unchanged from the previous pass,
-just applied to the new icon-rail + card-grid layout.
-
-## Upload
-The upload button (sidebar + hero card) stores the selected image as a
-data URL in `sessionStorage`. Whichever "Run" button you press next
-reads it and sends it along to that modality's endpoint (or the mock).

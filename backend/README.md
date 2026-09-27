@@ -6,6 +6,12 @@ FastAPI backend service for OreVision multimodal mineral ore classification. Orc
 
 ## 🚀 Setup & Execution
 
+The Render deployment uses `backend/` as its root directory and starts with:
+
+```bash
+uvicorn main:app --host 0.0.0.0 --port $PORT
+```
+
 ### 1. Create Virtual Environment
 ```bash
 # Windows
@@ -27,6 +33,8 @@ Copy `.env.example` to `.env` and fill in your deployed Hugging Face space/infer
 ```bash
 cp .env.example .env
 ```
+
+For production, set `ALLOWED_ORIGINS` to the Vercel frontend URL and use a managed PostgreSQL `DATABASE_URL`. SQLite data on Render is lost when the service is redeployed.
 
 ### 4. Run Development Server
 ```bash

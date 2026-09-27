@@ -66,9 +66,9 @@ export default function ResultsPage() {
   return (
     <div className="flex min-h-screen">
       <Sidebar />
-      <div className="flex-1 pl-[76px]">
+      <div className="flex-1 pl-[72px]">
 
-        <main className="mx-auto max-w-7xl px-8 py-6">
+        <main className="mx-auto max-w-6xl px-6 py-8 sm:px-8 lg:px-10">
           <Link
             href="/"
             className="mb-5 inline-flex items-center gap-1.5 text-xs font-medium text-ink-500 hover:text-ink-100 transition-colors"

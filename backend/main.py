@@ -57,6 +57,24 @@ app.add_middleware(
 def health_check():
     return {"status": "ok"}
 
+import subprocess
+@app.get("/api/connection-status")
+def connection_status():
+    pi_ip = os.getenv("PI_IP_ADDRESS")
+    pi_connected = False
+    if pi_ip:
+        try:
+            res = subprocess.run(
+                ["ping", "-c", "1", "-W", "1", pi_ip],
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.DEVNULL
+            )
+            pi_connected = (res.returncode == 0)
+        except Exception:
+            pass
+    return {"backend": True, "pi": pi_connected}
+
+
 
 # ── Status ────────────────────────────────────────────────────────────────────
 @app.get("/api/status", response_model=SystemStatusResponse)

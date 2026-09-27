@@ -1,4 +1,5 @@
 export function TrendChart({ values }: { values: number[] }) {
+
   if (values.length === 0) return null;
   const w = 280;
   const h = 90;

@@ -1,13 +1,12 @@
 import Link from "next/link";
-import { Icon } from "./Icon";
 import type { ModalityConfig } from "@/lib/modalities";
 
 const descriptions: Record<string, string> = {
-  rgb: "Classify using RGB data",
-  microscopic: "Classify using microscopic imagery",
-  infrared: "Classify using infrared spectral data",
-  acoustic: "Classify using acoustic resonance data",
-  capacitive: "Classify using capacitive sensing data",
+  rgb: "Classify minerals using RGB color imagery from high-resolution cameras",
+  microscopic: "Analyze grain structure and texture through microscopic imaging",
+  infrared: "Detect mineral composition via infrared spectral absorption patterns",
+  acoustic: "Identify minerals through acoustic resonance frequency analysis",
+  capacitive: "Measure dielectric properties using capacitive sensor arrays",
 };
 
 export function ModalityCard({ modality }: { modality: ModalityConfig }) {
@@ -16,26 +15,17 @@ export function ModalityCard({ modality }: { modality: ModalityConfig }) {
   return (
     <Link
       href={`/results/${modality.key}`}
-      className="group flex items-center justify-between gap-3 rounded-md border border-line/60 bg-base-850 p-4 transition-all hover:border-green-500/50 hover:bg-base-800/80"
+      id={`modality-card-${modality.key}`}
+      className="group flex flex-col justify-center rounded-sm border border-line/60 bg-base-850 p-4 lg:p-5 transition-all duration-300 hover:border-line hover:bg-base-800 hover:-translate-y-1 hover:shadow-lg"
     >
-      <div className="flex items-center gap-3 min-w-0">
-        <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md border border-line/60 bg-base-900 text-ink-300 transition-colors group-hover:border-green-500/40 group-hover:text-green-400">
-          <Icon name={modality.icon} className="h-4 w-4" />
-        </span>
-        <div className="min-w-0">
-          <div className="text-xs font-semibold text-ink-100 transition-colors group-hover:text-green-300">
-            {modality.label}
-          </div>
-          <div className="mt-0.5 truncate text-[11px] text-ink-500">
-            {desc}
-          </div>
+      <div className="flex items-center justify-between">
+        <div className="text-[13px] font-semibold text-ink-100 transition-colors group-hover:text-ink-100">
+          {modality.label}
         </div>
       </div>
-
-      <Icon
-        name="chevron"
-        className="h-4 w-4 shrink-0 text-ink-500 transition-transform group-hover:translate-x-0.5 group-hover:text-green-400"
-      />
+      <div className="mt-1.5 text-[11px] leading-relaxed text-ink-500">
+        {desc}
+      </div>
     </Link>
   );
 }

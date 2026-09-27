@@ -15,10 +15,10 @@ const config: Config = {
         },
         line: "#1a2e21",
         ink: {
-          100: "#e5f5eb",
-          300: "#9ec7b0",
-          500: "#5c856e",
-          700: "#3a5746",
+          100: "#ffffff",
+          300: "#e2e8f0",
+          500: "#94a3b8",
+          700: "#475569",
         },
         green: {
           500: "#00e676",
@@ -27,9 +27,11 @@ const config: Config = {
         },
       },
       fontFamily: {
-        display: ["var(--font-display)", "sans-serif"],
-        sans: ["var(--font-sans)", "sans-serif"],
-        mono: ["var(--font-mono)", "monospace"],
+        sans: ["var(--font-inter)", "Inter", "system-ui", "-apple-system", "sans-serif"],
+        mono: ["var(--font-mono)", "JetBrains Mono", "SFMono-Regular", "ui-monospace", "Menlo", "Consolas", "monospace"],
+      },
+      borderRadius: {
+        DEFAULT: "12px",
       },
       boxShadow: {
         glow: "0 0 0 1px rgba(0,230,118,0.25), 0 8px 30px -8px rgba(0,230,118,0.45)",

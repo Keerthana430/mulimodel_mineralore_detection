@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <!-- A geometric rock/ore shape -->
+  <path d="M12 4 L22 6 L28 16 L20 28 L8 26 L4 14 Z" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linejoin="round"/>
+  <path d="M12 4 L15 15 L22 6 M15 15 L28 16 M15 15 L20 28 M15 15 L8 26 M15 15 L4 14" fill="none" stroke="#22c55e" stroke-width="1.5" stroke-opacity="0.5" stroke-linejoin="round"/>
+</svg>

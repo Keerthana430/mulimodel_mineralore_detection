@@ -2,24 +2,46 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --font-display: "Segoe UI", "Inter", system-ui, -apple-system, sans-serif;
-  --font-sans: "Segoe UI", "Inter", system-ui, -apple-system, sans-serif;
-  --font-mono: "SFMono-Regular", "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+/* ─── Reset & Base ────────────────────────────────── */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
 html {
   color-scheme: dark;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 body {
   background: #040806;
-  color: #e5f5eb;
+  color: #ffffff;
+  font-family: var(--font-inter), "Inter", system-ui, -apple-system, sans-serif;
+  line-height: 1.6;
 }
 
+/* ─── Selection ───────────────────────────────────── */
+
 ::selection {
-  background: rgba(0, 230, 118, 0.3);
+  background: rgba(0, 230, 118, 0.25);
+  color: #fff;
 }
+
+/* ─── Typography helpers ──────────────────────────── */
+
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1.25;
+}
+
+code, pre, .font-mono {
+  font-family: var(--font-mono), "JetBrains Mono", "SFMono-Regular", ui-monospace, Menlo, Consolas, monospace;
+}
+
+/* ─── Gradient text ───────────────────────────────── */
 
 .text-gradient {
   background: linear-gradient(135deg, #33ff9c 0%, #00e676 100%);
@@ -28,11 +50,20 @@ body {
   color: transparent;
 }
 
+/* ─── Card ────────────────────────────────────────── */
+
 .card {
   background: #070c09;
   border: 1px solid #1a2e21;
-  border-radius: 10px;
+  border-radius: 12px;
+  transition: border-color 200ms ease, box-shadow 200ms ease;
 }
+
+.card:hover {
+  border-color: rgba(0, 230, 118, 0.15);
+}
+
+/* ─── Scrollbar ───────────────────────────────────── */
 
 .scrollbar-thin::-webkit-scrollbar {
   width: 6px;
@@ -42,10 +73,48 @@ body {
   border-radius: 999px;
 }
 
+/* ─── Pulse animation ─────────────────────────────── */
+
 @keyframes pulse-ring {
   0% { box-shadow: 0 0 0 0 rgba(0, 230, 118, 0.35); }
   100% { box-shadow: 0 0 0 8px rgba(0, 230, 118, 0); }
 }
 .pulse-ring {
   animation: pulse-ring 2.2s ease-out infinite;
+}
+
+/* ─── Focus ring ──────────────────────────────────── */
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid rgba(0, 230, 118, 0.5);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ─── Custom UI Animations ────────────────────────── */
+
+@keyframes float-blob {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(30px, -30px) scale(1.1); }
+  66% { transform: translate(-20px, 20px) scale(0.9); }
+}
+.animate-blob {
+  animation: float-blob 15s ease-in-out infinite;
+}
+
+@keyframes data-flow {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(200%); }
+}
+.animate-data-flow {
+  animation: data-flow 2s linear infinite;
+}
+
+@keyframes indicator-blink {
+  0%, 100% { opacity: 1; box-shadow: 0 0 10px rgba(34,197,94,0.6); }
+  50% { opacity: 0.5; box-shadow: 0 0 2px rgba(34,197,94,0.1); }
+}
+.animate-indicator {
+  animation: indicator-blink 2s ease-in-out infinite;
 }

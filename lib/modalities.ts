@@ -22,7 +22,7 @@ export const modalities: ModalityConfig[] = [
   { key: "microscopic", label: "Microscopic", short: "Microscopic", icon: "microscope", backbone: "EfficientNetB7", accent: "green" },
   { key: "infrared", label: "Infrared Spectral", short: "Infrared", icon: "waveInfrared", backbone: "1D-CNN", accent: "green" },
   { key: "acoustic", label: "Acoustic Resonance", short: "Acoustic", icon: "waveAcoustic", backbone: "ResNet1D", accent: "green" },
-  { key: "capacitive", label: "Capacitive Sensing", short: "Capacitive", icon: "bolt", backbone: "GBM Ensemble", accent: "green" },
+  { key: "capacitive", label: "Capacitive Sensing", short: "Capacitive", icon: "capacitive", backbone: "GBM Ensemble", accent: "green" },
 ];
 
 export function getModality(key: string): ModalityConfig | undefined {

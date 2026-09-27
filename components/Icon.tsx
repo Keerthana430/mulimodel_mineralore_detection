@@ -2,17 +2,17 @@ import {
   LayoutGrid,
   Camera,
   Microscope,
-  Activity,
-  AudioWaveform,
+  Waves,
+  Radio,
+  CircuitBoard,
   Zap,
   Upload,
   UploadCloud,
   Bell,
   Layers,
-  Target,
+  Crosshair,
   ChevronRight,
   ChevronLeft,
-  Gem,
   type LucideProps,
 } from "lucide-react";
 import type { FC } from "react";
@@ -23,6 +23,7 @@ export type IconName =
   | "microscope"
   | "waveInfrared"
   | "waveAcoustic"
+  | "capacitive"
   | "bolt"
   | "upload"
   | "cloudUpload"
@@ -33,21 +34,40 @@ export type IconName =
   | "back"
   | "logo";
 
+function RockIcon(props: LucideProps) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={props.strokeWidth ?? 2}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={props.className}
+    >
+      <path d="M9 3 L17 4 L21 12 L15 21 L6 19 L3 10 Z" />
+      <path d="M9 3 L11 11 L17 4 M11 11 L21 12 M11 11 L15 21 M11 11 L6 19 M11 11 L3 10" strokeOpacity="0.5" />
+    </svg>
+  );
+}
+
 const ICON_MAP: Record<IconName, FC<LucideProps>> = {
   grid: LayoutGrid,
   camera: Camera,
   microscope: Microscope,
-  waveInfrared: Activity,
-  waveAcoustic: AudioWaveform,
+  waveInfrared: Waves,
+  waveAcoustic: Radio,
+  capacitive: CircuitBoard,
   bolt: Zap,
   upload: Upload,
   cloudUpload: UploadCloud,
   bell: Bell,
   layers: Layers,
-  target: Target,
+  target: Crosshair,
   chevron: ChevronRight,
   back: ChevronLeft,
-  logo: Gem,
+  logo: RockIcon,
 };
 
 export function Icon({

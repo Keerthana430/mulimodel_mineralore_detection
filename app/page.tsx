@@ -11,9 +11,9 @@ export default function Home() {
       <div className="flex-1 pl-[76px]">
         <main className="mx-auto max-w-7xl px-8 py-8 space-y-8">
           {/* Hero / Workspace Row */}
-          <div className="grid grid-cols-1 gap-6 lg:grid-cols-3 items-stretch">
-            {/* Left Column: Mineral Classification */}
-            <section className="card flex flex-col justify-between p-6 lg:col-span-2">
+          <div className="w-full">
+            {/* Mineral Classification */}
+            <section className="card flex flex-col justify-between p-6">
               <div>
                 <div className="flex items-center gap-2">
                   <span className="inline-flex items-center gap-1.5 rounded bg-base-850 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-ink-300 border border-line/60">
@@ -38,22 +38,6 @@ export default function Home() {
                   Run Full Classification
                   <Icon name="chevron" className="h-3.5 w-3.5" />
                 </Link>
-              </div>
-            </section>
-
-            {/* Right Column: System Readiness */}
-            <section className="card flex flex-col justify-between p-6 lg:col-span-1">
-              <div className="flex items-center justify-between border-b border-line/60 pb-3">
-                <span className="text-[10px] font-semibold uppercase tracking-wider text-ink-500">
-                  SYSTEM READINESS
-                </span>
-                <span className="rounded bg-green-500/10 px-2 py-0.5 font-mono text-[10px] font-medium text-green-400 border border-green-500/20">
-                  READY
-                </span>
-              </div>
-              <div className="my-auto py-2">
-                <div className="font-mono text-3xl font-semibold text-green-400">92%</div>
-                <div className="mt-1 text-xs font-mono text-ink-500">5 / 5 models online</div>
               </div>
             </section>
           </div>
